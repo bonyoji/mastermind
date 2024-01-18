@@ -55,9 +55,20 @@ class Game
       if cpu_guess == user_code
         @@winner = true
       else
-        p cpu_guess
+        cpu_guess.each_with_index do |v, i|
+          if v == user_code[i]
+            cpu_guess[i] = v
+          else
+            cpu_guess[i] = (v + 1) % 6
+            # want to add a method to include
+            # numbers that are hinted
+          end
+        end
       end
+      p cpu_guess
+      turn += 1
     end
+    game_over
   end
 
   def random_code
